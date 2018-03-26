@@ -7,11 +7,21 @@ Crypt::LE::Challenge::External - spawn an external process to complete Let's Enc
 
 =head1 SYNOPSIS
 
-   le.pl --handle-with Crypt::LE::Challenge::External --handle-params '{"command":"ssh user@${domain} echo ${token}.${fingerprint} \\> ./public_html/.well-known/acme-challenge/${token}"}'
+    # Create a challenge response file on a remote server
+    le.pl --handle-with Crypt::LE::Challenge::External
+        --handle-params '{"command":"ssh user@${domain} echo ${token}.${fingerprint} \\> ./public_html/.well-known/acme-challenge/${token}"}'
 
 =head1 DESCRIPTION
 
+This helper module implemets satisfying a Lets Encrypt challenge
+by spawning an external process. Usually
+you will want to use the external process to copy files
+to a server in a DMZ.
+
 =head1 PARAMETERS
+
+The following parameters are interpolated into the
+external C<command>
 
   token
   fingerprint
